@@ -15,7 +15,7 @@ DB_CONFIG = {
     'database': 'securite_route'
 }
 
-# ⚠️ Mettez votre numéro WhatsApp avec indicatif pays
+#  Mettez votre numéro WhatsApp avec indicatif pays
 VOTRE_NUMERO = "+212669686281"  # ← changez ici ex: +212612345678
 
 # ===============================
@@ -43,7 +43,7 @@ def get_jour_max_semaine():
             return result[0]  # ex: "Lundi"
         return None
     except Exception as e:
-        print(f"❌ Erreur DB: {e}")
+        print(f" Erreur DB: {e}")
         return None
 
 
@@ -63,11 +63,11 @@ def get_jour_aujourd_hui():
 def envoyer_whatsapp(message, heure, minute):
     """Envoie un message WhatsApp via pywhatkit"""
     try:
-        print(f"📱 Envoi WhatsApp prévu à {heure}h{minute:02d}...")
+        print(f" Envoi WhatsApp prévu à {heure}h{minute:02d}...")
         kit.sendwhatmsg(VOTRE_NUMERO, message, heure, minute + 2, wait_time=15, tab_close=True) 
-        print(f"✅ Message envoyé : {message}")
+        print(f" Message envoyé : {message}")
     except Exception as e:
-        print(f"❌ Erreur envoi WhatsApp: {e}")
+        print(f" Erreur envoi WhatsApp: {e}")
 
 
 def verifier_et_notifier_veille():
@@ -79,15 +79,15 @@ def verifier_et_notifier_veille():
     
     if jour_max and jour_demain == jour_max:
         message = (
-            f"⚠️ Attention ! Demain ({jour_demain}) est ton jour "
+            f" Attention ! Demain ({jour_demain}) est ton jour "
             f"le plus somnolent de la semaine. "
-            f"😴 Dors bien ce soir pour être en forme !"
+            f" Dors bien ce soir pour être en forme !"
         )
         # Envoyer maintenant (heure actuelle + 1 minute)
         now = datetime.now()
         envoyer_whatsapp(message, now.hour, now.minute + 2)
     else:
-        print(f"ℹ️ Demain ({jour_demain}) n'est pas le jour max ({jour_max})")
+        print(f"ℹ Demain ({jour_demain}) n'est pas le jour max ({jour_max})")
 
 
 def verifier_et_notifier_matin():
@@ -99,13 +99,13 @@ def verifier_et_notifier_matin():
     
     if jour_max and jour_aujourd_hui == jour_max:
         message = (
-            f"☕ Bonjour ! Aujourd'hui ({jour_aujourd_hui}) tu es "
+            f" Bonjour ! Aujourd'hui ({jour_aujourd_hui}) tu es "
             f"généralement plus somnolent. "
             f"Bois un café et sois prudent sur la route ! 🚗"
         )
         envoyer_whatsapp(message, 8, 1)
     else:
-        print(f"ℹ️ Aujourd'hui ({jour_aujourd_hui}) n'est pas le jour max ({jour_max})")
+        print(f"ℹ Aujourd'hui ({jour_aujourd_hui}) n'est pas le jour max ({jour_max})")
 
 
 # ===============================
@@ -121,9 +121,9 @@ def demarrer_planificateur():
     # Message matin → chaque matin à 08:00
     schedule.every().day.at("08:00").do(verifier_et_notifier_matin)
     
-    print("✅ Planificateur démarré !")
-    print("   📅 Vérification veille : chaque soir à 21h00")
-    print("   ☀️  Vérification matin  : chaque matin à 08h00")
+    print("Planificateur démarré !")
+    print("    Vérification veille : chaque soir à 21h00")
+    print("     Vérification matin  : chaque matin à 08h00")
     
     while True:
         schedule.run_pending()
@@ -134,7 +134,7 @@ def demarrer_en_background():
     """Lance le planificateur dans un thread séparé"""
     thread = threading.Thread(target=demarrer_planificateur, daemon=True)
     thread.start()
-    print("🚀 Notifications WhatsApp actives en arrière-plan !")
+    print(" Notifications WhatsApp actives en arrière-plan !")
 
 
 # ===============================
@@ -144,35 +144,35 @@ def demarrer_en_background():
 def tester_maintenant():
     """Pour tester sans attendre 21h ou 8h"""
     print("\n" + "="*50)
-    print("🧪 TEST MANUEL")
+    print(" TEST MANUEL")
     print("="*50)
     
     jour_max = get_jour_max_semaine()
-    print(f"📊 Jour max cette semaine : {jour_max}")
-    print(f"📅 Aujourd'hui : {get_jour_aujourd_hui()}")
-    print(f"📅 Demain : {get_jour_demain()}")
+    print(f" Jour max cette semaine : {jour_max}")
+    print(f" Aujourd'hui : {get_jour_aujourd_hui()}")
+    print(f" Demain : {get_jour_demain()}")
     
     if jour_max:
         # Test message veille
         msg_veille = (
-            f"⚠️ Attention ! Demain ({get_jour_demain()}) est ton jour "
-            f"le plus somnolent. 😴 Dors bien ce soir !"
+            f" Attention ! Demain ({get_jour_demain()}) est ton jour "
+            f"le plus somnolent.  Dors bien ce soir !"
         )
         print(f"\n📱 Message veille :\n{msg_veille}")
         
         # Test message matin
         msg_matin = (
-            f"☕ Bonjour ! Aujourd'hui tu es généralement plus somnolent. "
+            f" Bonjour ! Aujourd'hui tu es généralement plus somnolent. "
             f"Bois un café et sois prudent ! 🚗"
         )
         print(f"\n📱 Message matin :\n{msg_matin}")
         
         # Envoyer le message test maintenant
         now = datetime.now()
-        print(f"\n📤 Envoi du message test dans 1 minute...")
+        print(f"\n Envoi du message test dans 1 minute...")
         envoyer_whatsapp(msg_veille, now.hour, now.minute + 1)
     else:
-        print("❌ Pas assez de données cette semaine")
+        print(" Pas assez de données cette semaine")
     
     print("="*50 + "\n")
 
@@ -185,8 +185,8 @@ if __name__ == "__main__":
     print("="*50)
     print("📱 SYSTÈME DE NOTIFICATIONS WHATSAPP")
     print("="*50)
-    print("1️⃣  Démarrer en arrière-plan (automatique)")
-    print("2️⃣  Tester maintenant")
+    print("1  Démarrer en arrière-plan (automatique)")
+    print("2  Tester maintenant")
     print("="*50)
     
     choix = input("Votre choix (1 ou 2) : ")
