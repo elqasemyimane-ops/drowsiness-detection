@@ -72,7 +72,7 @@ def envoyer_whatsapp(message, heure, minute):
 
 def verifier_et_notifier_veille():
     """Vérifie si demain est le jour max → envoie message la veille à 21h"""
-    print("🔍 Vérification du soir...")
+    print(" Vérification du soir...")
     
     jour_max = get_jour_max_semaine()
     jour_demain = get_jour_demain()
@@ -92,7 +92,7 @@ def verifier_et_notifier_veille():
 
 def verifier_et_notifier_matin():
     """Le matin du jour max → envoie message à 8h00"""
-    print("🔍 Vérification du matin...")
+    print(" Vérification du matin...")
     
     jour_max = get_jour_max_semaine()
     jour_aujourd_hui = get_jour_aujourd_hui()
@@ -101,7 +101,7 @@ def verifier_et_notifier_matin():
         message = (
             f" Bonjour ! Aujourd'hui ({jour_aujourd_hui}) tu es "
             f"généralement plus somnolent. "
-            f"Bois un café et sois prudent sur la route ! 🚗"
+            f"Bois un café et sois prudent sur la route ! "
         )
         envoyer_whatsapp(message, 8, 1)
     else:
@@ -163,9 +163,9 @@ def tester_maintenant():
         # Test message matin
         msg_matin = (
             f" Bonjour ! Aujourd'hui tu es généralement plus somnolent. "
-            f"Bois un café et sois prudent ! 🚗"
+            f"Bois un café et sois prudent ! "
         )
-        print(f"\n📱 Message matin :\n{msg_matin}")
+        print(f"\n Message matin :\n{msg_matin}")
         
         # Envoyer le message test maintenant
         now = datetime.now()
@@ -183,7 +183,7 @@ def tester_maintenant():
 
 if __name__ == "__main__":
     print("="*50)
-    print("📱 SYSTÈME DE NOTIFICATIONS WHATSAPP")
+    print(" SYSTÈME DE NOTIFICATIONS WHATSAPP")
     print("="*50)
     print("1  Démarrer en arrière-plan (automatique)")
     print("2  Tester maintenant")
