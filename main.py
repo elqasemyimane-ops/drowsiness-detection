@@ -71,9 +71,9 @@ if not cap.isOpened():
 
 last_alert_time = 0
 
-print("🚀 Système de détection de somnolence lancé...")
-print("➡️ Fermez les yeux pour tester l’alerte")
-print("➡️ Bâillez pour tester le MAR")
+print("Système de détection de somnolence lancé...")
+print(" Fermez les yeux pour tester l’alerte")
+print(" Bâillez pour tester le MAR")
 
 while True:
     ret, frame = cap.read()
@@ -118,7 +118,7 @@ while True:
                 # Gestion de l'alerte sonore temporisée
                 current_time = time.time()
                 if current_time - last_alert_time > ALERT_DELAY:
-                    print(f"⚠️ Somnolence détectée ! EAR: {ear:.2f}, MAR: {mar:.2f}")
+                    print(f" Somnolence détectée ! EAR: {ear:.2f}, MAR: {mar:.2f}")
                     # Assurez-vous que 'alert.wav' est dans le même dossier
                     playsound(ALERT_SOUND) 
                     last_alert_time = current_time
